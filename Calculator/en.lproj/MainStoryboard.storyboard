@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="std-Xp-qAh">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
@@ -373,20 +373,20 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="XVb-nA-MYt" kind="push" identifier="Graph" id="gMa-Wu-1JT"/>
+                                    <segue destination="XVb-nA-MYt" kind="push" id="ZFH-4i-dZT"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Calculator" id="JWG-77-yva"/>
+                    <navigationItem key="navigationItem" title="Calculator" id="lCJ-Wd-6gb"/>
                     <connections>
                         <outlet property="display" destination="j9y-DS-5zO" id="RDp-A4-wKb"/>
                         <outlet property="historyDisplay" destination="UEK-wt-vPx" id="gdI-te-r2h"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="927" y="189"/>
+            <point key="canvasLocation" x="1482" y="-63"/>
         </scene>
         <!--Graph View Controller - Graph-->
         <scene sceneID="AgL-Ae-Dux">
@@ -405,33 +405,51 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Graph" id="dLA-lo-w8p"/>
+                    <navigationItem key="navigationItem" title="Graph" id="RA7-VS-uKp"/>
                     <connections>
                         <outlet property="graphView" destination="SaL-SR-dah" id="bJU-Cz-yGj"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1411" y="-218"/>
+            <point key="canvasLocation" x="1937" y="-218"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="b3V-69-TTV">
+        <scene sceneID="eO5-2I-F8P">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cyq-Bb-Yyr" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController id="PWc-IG-TQ3" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mmf-Zl-HDj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController id="std-Xp-qAh" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="u0W-S7-Axu">
+                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Laf-s1-Kfu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="2" kind="relationship" relationship="rootViewController" id="bKt-VJ-7yr"/>
+                        <segue destination="2" kind="relationship" relationship="rootViewController" id="RKb-pV-A8R"/>
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="409" y="189"/>
+            <point key="canvasLocation" x="956" y="-63"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="AxesDrawerView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AxesDrawerView.h"/>
+        </class>
+        <class className="CalculatorViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CalculatorViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="display" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="historyDisplay" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="GraphViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GraphViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="graphView" candidateClass="AxesDrawerView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
