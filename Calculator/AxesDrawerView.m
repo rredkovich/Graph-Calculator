@@ -25,7 +25,7 @@
     _bounds.origin.x = 1;
     _bounds.origin.y = 1;
     _bounds.size.width = 320;
-    _bounds.size.height = 480;
+    _bounds.size.height = 460;
     return  _bounds;
 }
 
