@@ -16,6 +16,21 @@
 @implementation GraphViewController
 @synthesize graphView = _graphView;
 
+
+- (CGPoint) calculateYforX:(int)x withProgram:(id)program {
+    NSDictionary *variablesSet = [[NSDictionary alloc] init];    
+    variablesSet = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:x], @"x", nil];
+    CGPoint point;
+    point.x = 12;
+    point.y = [CalculatorBrain runProgram:program usingVariableValues:variablesSet];
+    return point;
+}
+
+-  (CGPoint) drawThisPoint:(GraphView *)sender {
+    return [self calculateYforX:x withProgram:<#(id)#>
+}
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];

@@ -9,6 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "AxesDrawer.h"
 
-@interface GraphView : UIView
+@class GraphView;
 
+@protocol PointToDraw 
+- (CGPoint)drawThisPoint:(GraphView *)sender;
 @end
+
+
+@interface GraphView : UIView
+@property (nonatomic, weak) IBOutlet id <PointToDraw> dataSource;
+@end
+

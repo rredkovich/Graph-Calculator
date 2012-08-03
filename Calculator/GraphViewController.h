@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "GraphView.h"
+#import "CalculatorBrain.h"
 
-@interface GraphViewController : UIViewController
+@interface GraphViewController : UIViewController <PointToDraw>
 
 @end
