@@ -65,14 +65,14 @@
 - (void)drawRect:(CGRect)rect
 {
     [AxesDrawer drawAxesInRect:self.bounds originAtPoint:self.origin scale:self.scale];
-    CGPoint point = [self.dataSource drawThisPoint:self];
+  /*CGPoint point = [self.dataSource drawThisPoint:self];
     CGContextRef context = UIGraphicsGetCurrentContext();
     UIGraphicsPushContext(context);
     CGContextBeginPath(context);
     CGContextAddArc(context, point.x, point.y, 2, 0, 2*M_PI, YES);
     CGContextStrokePath(context);
     UIGraphicsPopContext();    
-    
+    */
 }
 
 @end

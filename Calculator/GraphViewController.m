@@ -27,7 +27,11 @@
 }
 
 -  (CGPoint) drawThisPoint:(GraphView *)sender {
-    return [self calculateYforX:x withProgram:<#(id)#>
+    //it must use [CalculatorBrain runProgram:usingVariables] to discover Y like calculateYforX:withProgram: method
+    CGPoint testPoint;
+    testPoint.x = 19;
+    testPoint.y = 10;
+    return testPoint;
 }
 
 
