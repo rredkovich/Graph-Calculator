@@ -9,7 +9,7 @@
 #import "GraphViewController.h"
 
 @interface GraphViewController ()
-@property (nonatomic, weak) IBOutlet AxesDrawerView *graphView;
+@property (nonatomic, weak) IBOutlet GraphView *graphView;
 
 @end
 
