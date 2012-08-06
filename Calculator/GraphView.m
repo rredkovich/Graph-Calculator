@@ -65,14 +65,21 @@
 - (void)drawRect:(CGRect)rect
 {
     [AxesDrawer drawAxesInRect:self.bounds originAtPoint:self.origin scale:self.scale];
-  /*CGPoint point = [self.dataSource drawThisPoint:self];
+    //CGPoint point = [self.dataSource drawThisPoint:self];
     CGContextRef context = UIGraphicsGetCurrentContext();
-    UIGraphicsPushContext(context);
+    CGContextSetLineWidth(context, 1.0);
+    [[UIColor blackColor] setStroke];
+    //UIGraphicsPushContext(context);
     CGContextBeginPath(context);
-    CGContextAddArc(context, point.x, point.y, 2, 0, 2*M_PI, YES);
+    CGContextAddArc(context, 100, 100, 0.5, 0, 2*M_PI, YES);
+    CGContextAddArc(context, 110, 150, 1, 0, 2*M_PI, YES);
+    CGContextAddArc(context, 200, 220, 1, 0, 2*M_PI, YES);
+    CGContextAddLineToPoint(context, 205, 300);
+    CGContextAddLineToPoint(context, 305, 300);
     CGContextStrokePath(context);
-    UIGraphicsPopContext();    
-    */
+    
+    //UIGraphicsPopContext();    
+   
 }
 
 @end
