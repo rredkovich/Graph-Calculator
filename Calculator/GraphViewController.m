@@ -15,23 +15,39 @@
 
 @implementation GraphViewController
 @synthesize graphView = _graphView;
+@synthesize program = _program;
 
-
-- (CGPoint) calculateYforX:(int)x withProgram:(id)program {
-    NSDictionary *variablesSet = [[NSDictionary alloc] init];    
-    variablesSet = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:x], @"x", nil];
-    CGPoint point;
-    point.x = 12;
-    point.y = [CalculatorBrain runProgram:program usingVariableValues:variablesSet];
-    return point;
+- (void) setGraphView:(GraphView *)graphView {
+    _graphView = graphView;
+    self.graphView.dataSource = self;
 }
 
--  (CGPoint) drawThisPoint:(GraphView *)sender {
-    //it must use [CalculatorBrain runProgram:usingVariables] to discover Y like calculateYforX:withProgram: method
-    CGPoint testPoint;
-    testPoint.x = 19;
-    testPoint.y = 10;
-    return testPoint;
+- (void) setProgram:(id)program {
+    _program = program;
+   
+    [self.graphView setNeedsDisplay];
+}
+
+- (NSArray *)graphSource:(GraphView *)sender inBoundsFrom:(CGFloat)beginnig to:(CGFloat)end {
+    NSMutableArray *graphSource = [[NSMutableArray alloc] init];
+    if (beginnig > end) return graphSource;
+    
+    NSNumber *startValue = [[NSNumber alloc] initWithInt:beginnig];
+    NSNumber *currentValue = startValue;
+    NSNumber *endValue = [[NSNumber alloc] initWithInt:end];
+    
+  
+    while (![currentValue isEqualToNumber:endValue]) {
+        NSDictionary *variable = [NSDictionary dictionaryWithObjectsAndKeys:currentValue, @"x", nil];
+        NSNumber *yForX = [[NSNumber alloc] initWithFloat:[CalculatorBrain runProgram:self.program usingVariableValues:variable]];
+        
+        [graphSource addObject:currentValue];
+        [graphSource addObject:yForX];
+        
+        currentValue = [NSNumber numberWithInt:([currentValue intValue] + 1)];         
+    }
+    
+    return graphSource;
 }
 
 

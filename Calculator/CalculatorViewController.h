@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GraphViewController.h"
 
 @interface CalculatorViewController : UIViewController
 

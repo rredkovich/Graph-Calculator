@@ -373,7 +373,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="XVb-nA-MYt" kind="push" identifier="Graph" id="ZFH-4i-dZT"/>
+                                    <segue destination="XVb-nA-MYt" kind="push" identifier="Graph" id="N8X-z0-ali"/>
                                 </connections>
                             </button>
                         </subviews>

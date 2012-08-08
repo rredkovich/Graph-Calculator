@@ -10,6 +10,6 @@
 #import "GraphView.h"
 #import "CalculatorBrain.h"
 
-@interface GraphViewController : UIViewController <PointToDraw>
-
+@interface GraphViewController : UIViewController <PointsToDraw>
+@property (nonatomic, strong) id program;
 @end

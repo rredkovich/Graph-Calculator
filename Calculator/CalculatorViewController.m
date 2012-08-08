@@ -54,9 +54,6 @@
     
 }
 
-- (IBAction)testPressed{
-    self.brain.variablesSet = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:12], @"x", [NSNumber numberWithDouble:2], @"y",[NSNumber numberWithDouble:54], @"z", nil];
-}
 
 - (IBAction)operationPressed:(UIButton *)sender 
 {
@@ -119,6 +116,14 @@
     self.display.text = @"0"; //clears the history display
 
     [self.brain releaseStack]; //releases operandStack    
+    
+}
+
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"Graph"]) {
+        [segue.destinationViewController setProgram:self.brain.program];       
+    }
     
 }
 

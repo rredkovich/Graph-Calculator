@@ -11,12 +11,12 @@
 
 @class GraphView;
 
-@protocol PointToDraw 
-- (CGPoint)drawThisPoint:(GraphView *)sender;
+@protocol PointsToDraw 
+- (NSArray *)graphSource:(GraphView *)sender inBoundsFrom:(CGFloat)beginnig to:(CGFloat)end;
 @end
 
 
 @interface GraphView : UIView
-@property (nonatomic, weak) IBOutlet id <PointToDraw> dataSource;
+@property (nonatomic, weak) IBOutlet id <PointsToDraw> dataSource;
 @end
 

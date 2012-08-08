@@ -32,14 +32,14 @@
 
 //жест pan изменяет координаты origin
 -(CGPoint) origin {
-    _origin.x = 1;
-    _origin.y = 1;
+    _origin.x = 160;
+    _origin.y = 240;
     return _origin;
 }
 
 //жест pinch изменяет значение scale
 -(CGFloat) scale {
-    return _scale = 1;
+    return _scale = 5;
 }
 
 
@@ -65,20 +65,26 @@
 - (void)drawRect:(CGRect)rect
 {
     [AxesDrawer drawAxesInRect:self.bounds originAtPoint:self.origin scale:self.scale];
-    //CGPoint point = [self.dataSource drawThisPoint:self];
+    
+    NSArray *graphSource = [[NSArray alloc] initWithArray:[self.dataSource graphSource:self inBoundsFrom:self.bounds.origin.x to:self.bounds.size.width]];
+    
+    
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(context, 1.0);
-    [[UIColor blackColor] setStroke];
-    //UIGraphicsPushContext(context);
-    CGContextBeginPath(context);
-    CGContextAddArc(context, 100, 100, 0.5, 0, 2*M_PI, YES);
-    CGContextAddArc(context, 110, 150, 1, 0, 2*M_PI, YES);
-    CGContextAddArc(context, 200, 220, 1, 0, 2*M_PI, YES);
-    CGContextAddLineToPoint(context, 205, 300);
-    CGContextAddLineToPoint(context, 305, 300);
+    UIGraphicsPushContext(context);
+
+    CGContextMoveToPoint(context, [[graphSource objectAtIndex:0] floatValue], [[graphSource objectAtIndex:1] floatValue]);
+    
+    for (int i = 0; i < [graphSource count]; i = i + 2) {
+
+        CGFloat xPosition = [[graphSource objectAtIndex:i] floatValue] + self.origin.x;
+        CGFloat yPosition = -[[graphSource objectAtIndex:(i+1)] floatValue] + self.origin.y;
+        CGContextAddLineToPoint(context, xPosition, yPosition);
+    }
+    
     CGContextStrokePath(context);
     
-    //UIGraphicsPopContext();    
+    UIGraphicsPopContext(); 
+
    
 }
 
