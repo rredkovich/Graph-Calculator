@@ -79,9 +79,7 @@
         result = topOfStack;
     
     }else if ([[self class] isAnOperand:topOfStack] && ( [topOfStack isEqualToString:@"cos"] || [topOfStack isEqualToString:@"sin"] || [topOfStack isEqualToString:@"sqrt"])) {
-        result =  [[[topOfStack stringByAppendingString:@"("] stringByAppendingString:topOfStack] stringByAppendingString:@")"]; //topOfStack is cos/sin/sqrt
-        //result =  [[[topOfStack stringByAppendingString:@"("] stringByAppendingString:[NSString stringWithFormat:@"%@",[self runProgram:stack]]] stringByAppendingString:@")"]; неудачная попытка вывести под операндом конечное число
-
+        result =  [[[topOfStack stringByAppendingString:@"("] stringByAppendingString:topOfStack] stringByAppendingString:@")"]; //topOfStack is cos/sin
         
     }else if ([[self class] isAnOperand:topOfStack] && ( [topOfStack isEqualToString:@"+"] || [topOfStack isEqualToString:@"-"])) { //topOfStack is + or -
 
@@ -185,7 +183,8 @@
 
 + (double)runProgram:(id)program usingVariableValues:(NSDictionary *)variableValues{
     
-    double result;
+    double result = 0.0;
+        
     NSMutableArray *stack;
     if ([program isKindOfClass:[NSArray class]] && variableValues) {
         stack = [program mutableCopy];
@@ -210,6 +209,7 @@
     }
     return result;
 }
+
 
 
 + (double)runProgram:(id)program

@@ -11,8 +11,6 @@
 @interface GraphView ()
 //тестовые значения для метода drawAxesInRect
 @property (nonatomic) CGRect bounds;
-@property (nonatomic) CGPoint origin;
-@property (nonatomic) CGFloat scale;
 @end
 
 @implementation GraphView
@@ -23,23 +21,52 @@
 
  
 -(CGRect) bounds {
-    _bounds.origin.x = 1;
-    _bounds.origin.y = 1;
+    _bounds.origin.x = 0;
+    _bounds.origin.y = 0;
     _bounds.size.width = 320;
     _bounds.size.height = 460;
     return  _bounds;
 }
 
-//жест pan изменяет координаты origin
--(CGPoint) origin {
-    _origin.x = 160;
-    _origin.y = 240;
-    return _origin;
+- (void) setOrigin:(CGPoint)origin {
+    if ((origin.x != _origin.x) || (origin.y != _origin.y)) {
+        _origin = origin;
+        [self setNeedsDisplay];
+    }
 }
 
-//жест pinch изменяет значение scale
--(CGFloat) scale {
-    return _scale = 5;
+-(void) setScale:(CGFloat)scale {
+    if (_scale != scale) {
+        _scale = scale;
+        [self setNeedsDisplay];
+    }
+    if (!_scale) {
+        _scale = 1;
+    }
+}
+
+- (CGFloat) getScale {
+    if (!_scale) _scale = 1;
+    return _scale;
+}
+
+- (void) pan: (UIPanGestureRecognizer *)gesture {
+    if ((gesture.state == UIGestureRecognizerStateChanged) ||
+        (gesture.state == UIGestureRecognizerStateEnded)) {
+        CGPoint fingerPoint = [gesture translationInView:self];
+        fingerPoint.x += self.origin.x;
+        fingerPoint.y += self.origin.y;
+        self.origin = fingerPoint;
+        [gesture setTranslation:CGPointZero inView:self];
+    }
+}
+
+- (void)pinch:(UIPinchGestureRecognizer *)gesture {
+    if ((gesture.state == UIGestureRecognizerStateChanged) ||
+        (gesture.state == UIGestureRecognizerStateEnded)) {
+        self.scale *= (gesture.scale);
+        gesture.scale = 1;
+    }
 }
 
 
@@ -52,22 +79,24 @@
     return self;
 }
 
+
 - (void)setup
 {
     self.contentMode = UIViewContentModeRedraw; // if our bounds changes, redraw ourselves
 }
+
 
 - (void)awakeFromNib
 {
     [self setup]; // get initialized when we come out of a storyboard
 }
 
+
 - (void)drawRect:(CGRect)rect
 {
     [AxesDrawer drawAxesInRect:self.bounds originAtPoint:self.origin scale:self.scale];
     
-    NSArray *graphSource = [[NSArray alloc] initWithArray:[self.dataSource graphSource:self inBoundsFrom:self.bounds.origin.x to:self.bounds.size.width]];
-    
+    NSArray *graphSource = [[NSArray alloc] initWithArray:[self.dataSource graphSource:self inBoundsFrom:(-self.origin.x) to:(self.origin.x + self.bounds.size.width)]];
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     UIGraphicsPushContext(context);
@@ -75,9 +104,11 @@
     CGContextMoveToPoint(context, [[graphSource objectAtIndex:0] floatValue], [[graphSource objectAtIndex:1] floatValue]);
     
     for (int i = 0; i < [graphSource count]; i = i + 2) {
-
-        CGFloat xPosition = [[graphSource objectAtIndex:i] floatValue] + self.origin.x;
-        CGFloat yPosition = -[[graphSource objectAtIndex:(i+1)] floatValue] + self.origin.y;
+        
+        CGFloat xPosition = self.origin.x + ([[graphSource objectAtIndex:i] floatValue] - [[graphSource objectAtIndex:i] floatValue] * self.scale);
+        
+        CGFloat yPosition = self.origin.y - ([[graphSource objectAtIndex:(i+1)] floatValue] - [[graphSource objectAtIndex:(i+1)] floatValue] * self.scale);
+        
         CGContextAddLineToPoint(context, xPosition, yPosition);
     }
     

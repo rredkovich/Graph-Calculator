@@ -20,6 +20,10 @@
 - (void) setGraphView:(GraphView *)graphView {
     _graphView = graphView;
     self.graphView.dataSource = self;
+    
+    [self.graphView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self.graphView action:@selector(pan:)]];
+    
+    [self.graphView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self.graphView action:@selector(pinch:)]];
 }
 
 - (void) setProgram:(id)program {

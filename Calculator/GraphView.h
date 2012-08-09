@@ -17,6 +17,12 @@
 
 
 @interface GraphView : UIView
+- (void) pan: (UIPanGestureRecognizer *)gesture;
+- (void) pinch: (UIPinchGestureRecognizer *) gesture;
+
+@property (nonatomic) CGFloat scale;
+@property (nonatomic) CGPoint origin;
+
 @property (nonatomic, weak) IBOutlet id <PointsToDraw> dataSource;
 @end
 
