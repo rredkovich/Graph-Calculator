@@ -36,19 +36,19 @@
     NSMutableArray *graphSource = [[NSMutableArray alloc] init];
     if (beginnig > end) return graphSource;
     
-    NSNumber *startValue = [[NSNumber alloc] initWithInt:beginnig];
+    NSNumber *startValue = [[NSNumber alloc] initWithDouble:beginnig];
     NSNumber *currentValue = startValue;
-    NSNumber *endValue = [[NSNumber alloc] initWithInt:end];
+    NSNumber *endValue = [[NSNumber alloc] initWithDouble:end];
     
   
     while (![currentValue isEqualToNumber:endValue]) {
         NSDictionary *variable = [NSDictionary dictionaryWithObjectsAndKeys:currentValue, @"x", nil];
-        NSNumber *yForX = [[NSNumber alloc] initWithFloat:[CalculatorBrain runProgram:self.program usingVariableValues:variable]];
+        NSNumber *yForX = [[NSNumber alloc] initWithDouble:[CalculatorBrain runProgram:self.program usingVariableValues:variable]];
         
         [graphSource addObject:currentValue];
         [graphSource addObject:yForX];
         
-        currentValue = [NSNumber numberWithInt:([currentValue intValue] + 1)];         
+        currentValue = [NSNumber numberWithDouble:([currentValue doubleValue] + 0.5)];         
     }
     
     return graphSource;
